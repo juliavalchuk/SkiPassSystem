@@ -1,9 +1,9 @@
-package ua.com.bukovel.skiipass.test;
+package ua.com.bukovel.skipass.test;
 
-import ua.com.bukovel.skiipass.SkiPassSystem;
-import ua.com.bukovel.skiipass.SkiPassType;
-import ua.com.bukovel.skiipass.Tourniquet;
-import ua.com.bukovel.skiipass.type.SkiPass;
+import ua.com.bukovel.skipass.SkiPassSystem;
+import ua.com.bukovel.skipass.SkiPassType;
+import ua.com.bukovel.skipass.Tourniquet;
+import ua.com.bukovel.skipass.type.SkiPass;
 
 /**
  * Created by Yuliia_Valchuk

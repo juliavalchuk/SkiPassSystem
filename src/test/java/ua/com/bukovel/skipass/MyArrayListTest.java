@@ -1,6 +1,5 @@
-package ua.com.bukovel.skiipass;
+package ua.com.bukovel.skipass;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

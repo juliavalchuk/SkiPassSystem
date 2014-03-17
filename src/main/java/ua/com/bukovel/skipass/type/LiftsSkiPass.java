@@ -1,4 +1,4 @@
-package ua.com.bukovel.skiipass.type;
+package ua.com.bukovel.skipass.type;
 
 /**
  * Created by julia
@@ -26,6 +26,5 @@ public class LiftsSkiPass extends SkiPass {
 
     @Override
     public void activate() {
-
     }
 }

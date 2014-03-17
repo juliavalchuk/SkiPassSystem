@@ -1,4 +1,4 @@
-package ua.com.bukovel.skiipass.type;
+package ua.com.bukovel.skipass.type;
 
 import org.junit.Test;
 
@@ -7,29 +7,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by julia
+ * Created by Yuliia_Valchuk
  */
-public class SkiPassTest {
+public class LiftsSkiPassTest {
 
     @Test
-    public void testGetId(){
-        SkiPass skiPass = new WeekdayLiftsSkiPass();
-        int expResult = 123;
-        int actResult = 0;
-        assertEquals(expResult, actResult);
-    }
-
-    @Test
-    public void testGetAmount(){
-        SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setAmount(5);
-        int expResult = 5;
-        int actResult = skiPass.getAmount();
-        assertEquals(expResult, actResult);
-    }
-
-    @Test
-    public void testGetAmountOfLiftsWhenSkiiPassWasUsing(){
+    public void testGetAmountOfLiftsWhenSkiPassWasUsing(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
@@ -40,22 +23,22 @@ public class SkiPassTest {
     }
 
     @Test
-    public void testGetAmountOfDaysWhenSkiiPassWasUsing(){
-        SkiPass skiPass = new WeekdayDaysSkiPass();
+    public void testGetAmountOfLiftsWhenSkiPassWasUsedMoreThanItCould(){
+        SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
         skiPass.tryEnterLift();
-        int expResult = 5;
+        skiPass.tryEnterLift();
+        skiPass.tryEnterLift();
+        skiPass.tryEnterLift();
+        skiPass.tryEnterLift();
+        int expResult = 0;
         int actResult = skiPass.getAmount();
         assertEquals(expResult, actResult);
     }
 
     @Test
-    public void testGetShiftOfDay(){
-    }
-
-    @Test
-    public void testOneLiftLiftsSkiiPass(){
+    public void testTryEnterLiftOnce(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
@@ -65,7 +48,7 @@ public class SkiPassTest {
     }
 
     @Test
-    public void testAllLiftLiftsSkiiPass(){
+    public void testTryEnterLiftAmountTimes(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
@@ -79,7 +62,7 @@ public class SkiPassTest {
     }
 
     @Test
-    public void testAllAndOneLiftLiftsSkiiPass(){
+    public void testTryEnterLiftMoreThanAmountTimes(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
@@ -92,7 +75,7 @@ public class SkiPassTest {
     }
 
     @Test
-    public void testIsWorkLiftsSkiiPassWhenItIsBloked(){
+    public void testIsValidSkiPassWhenItIsBloked(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.block();
         boolean actResult = skiPass.isValid();
@@ -100,15 +83,16 @@ public class SkiPassTest {
     }
 
     @Test
-    public void testIsWorkLiftsSkiiPassWhenAmountZero(){
+    public void testIsValidSkiPassWhenAmountIsZero(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setAmount(0);
+        skiPass.setAmount(1);
+        skiPass.tryEnterLift();
         boolean actResult = skiPass.isValid();
         assertFalse(actResult);
     }
 
     @Test
-    public void testIsWorkLiftsSkiiPassWhenItIsUnblokedAndAmountMoreThenZero(){
+    public void testIsValidSkiPassWhenItIsUnblokedAndAmountMoreThenZero(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setAmount(3);
         boolean actResult = skiPass.isValid();

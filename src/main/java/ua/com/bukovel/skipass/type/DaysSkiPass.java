@@ -1,6 +1,6 @@
-package ua.com.bukovel.skiipass.type;
+package ua.com.bukovel.skipass.type;
 
-import ua.com.bukovel.skiipass.SkiPassType;
+import ua.com.bukovel.skipass.SkiPassType;
 
 import java.util.Calendar;
 

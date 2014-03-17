@@ -1,6 +1,6 @@
-package ua.com.bukovel.skiipass;
+package ua.com.bukovel.skipass;
 
-import ua.com.bukovel.skiipass.type.SkiPass;
+import ua.com.bukovel.skipass.type.SkiPass;
 
 import java.util.UUID;
 
@@ -16,7 +16,12 @@ public class Tourniquet {
 
     public boolean check(UUID id)
     {
-        SkiPass skiPass = skiPassSystem.getSkiPass(id);
+        SkiPass skiPass = null;
+        try {
+            skiPass = skiPassSystem.getSkiPass(id);
+        } catch (IllegalArgumentException e){
+            return false;
+        }
         if(!skiPass.tryEnterLift()){
             skiPassSystem.reportLiftDecline(skiPass.getType());
             return false;

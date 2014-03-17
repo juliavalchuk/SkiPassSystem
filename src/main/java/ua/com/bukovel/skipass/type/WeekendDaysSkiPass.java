@@ -1,4 +1,4 @@
-package ua.com.bukovel.skiipass.type;
+package ua.com.bukovel.skipass.type;
 
 /**
  * Created by julia

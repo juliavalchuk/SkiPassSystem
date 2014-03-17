@@ -1,6 +1,6 @@
-package ua.com.bukovel.skiipass.type;
+package ua.com.bukovel.skipass.type;
 
-import ua.com.bukovel.skiipass.SkiPassType;
+import ua.com.bukovel.skipass.SkiPassType;
 
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ public abstract class SkiPass implements Cloneable {
     protected boolean isblocked;
 
     public void setStartsParameters(UUID uuid, int type){
-        if(id == null){
+        if(id != null){
             throw new IllegalArgumentException("Ski-pass has already had id");
         }
         id = uuid;
@@ -38,8 +38,9 @@ public abstract class SkiPass implements Cloneable {
         {
             throw new IllegalArgumentException("Amount cannot be less than 1");
         } else
-        if(type == SkiPassType.WEEKDAY_HALF_DAY_SKI_PASS || type == SkiPassType.WEEKEND_HALF_DAY_SKI_PASS)
-        {
+        if((type == SkiPassType.WEEKDAY_HALF_DAY_SKI_PASS || type == SkiPassType.WEEKEND_HALF_DAY_SKI_PASS)
+                && amount != 1){
+            throw new IllegalArgumentException("Illegal amount for half day");
         }
 
         this.amount = amount;

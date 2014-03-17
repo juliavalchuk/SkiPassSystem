@@ -1,6 +1,6 @@
-package ua.com.bukovel.skiipass;
+package ua.com.bukovel.skipass;
 
-import ua.com.bukovel.skiipass.type.SkiPass;
+import ua.com.bukovel.skipass.type.SkiPass;
 
 import java.util.HashMap;
 

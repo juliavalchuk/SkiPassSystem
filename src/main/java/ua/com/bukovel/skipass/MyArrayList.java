@@ -1,4 +1,4 @@
-package ua.com.bukovel.skiipass;
+package ua.com.bukovel.skipass;
 
 import java.util.Arrays;
 

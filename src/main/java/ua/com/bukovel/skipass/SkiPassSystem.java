@@ -1,6 +1,6 @@
-package ua.com.bukovel.skiipass;
+package ua.com.bukovel.skipass;
 
-import ua.com.bukovel.skiipass.type.*;
+import ua.com.bukovel.skipass.type.*;
 
 import java.util.UUID;
 
