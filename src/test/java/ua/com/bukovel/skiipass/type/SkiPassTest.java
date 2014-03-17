@@ -14,9 +14,8 @@ public class SkiPassTest {
     @Test
     public void testGetId(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setId(123);
         int expResult = 123;
-        int actResult = skiPass.getId();
+        int actResult = 0;
         assertEquals(expResult, actResult);
     }
 
@@ -53,11 +52,6 @@ public class SkiPassTest {
 
     @Test
     public void testGetShiftOfDay(){
-        SkiPass skiPass = new WeekdayDaysSkiPass();
-        skiPass.setShiftOfDay(2);
-        int expResult = 2;
-        int actResult = skiPass.getShiftOfDay();
-        assertEquals(expResult, actResult);
     }
 
     @Test

@@ -2,17 +2,19 @@ package ua.com.bukovel.skiipass.type;
 
 import ua.com.bukovel.skiipass.SkiPassType;
 
+import java.util.UUID;
+
 /**
  * Created by julia
  */
 public abstract class SkiPass implements Cloneable {
-    protected String id; // uniq id
+    protected UUID id; // uniq id
     protected int amount; // days or lifts
     protected int type; // kind of skii-pass
     protected boolean isblocked;
 
-    public void setStartsParametrs(String uuid, int type){
-        if(id != null && id.isEmpty()){
+    public void setStartsParameters(UUID uuid, int type){
+        if(id == null){
             throw new IllegalArgumentException("Ski-pass has already had id");
         }
         id = uuid;
@@ -25,7 +27,7 @@ public abstract class SkiPass implements Cloneable {
 
     }
 
-    public String getId()
+    public UUID getId()
     {
         return id;
     }
@@ -54,7 +56,7 @@ public abstract class SkiPass implements Cloneable {
     }
 
     public String getTypeString(){
-        return SkiPassType.intTypeToString(type);
+        return SkiPassType.toString(type);
     }
 
     public void block(){
@@ -64,24 +66,6 @@ public abstract class SkiPass implements Cloneable {
     public void unblock(){
         isblocked = false;
     }
-
-//    public void setStartTime(int hour, int minutes)
-//    {
-//        START_WORK_HOUR = hour;
-//        END_WORK_MINUTE = minutes;
-//    }
-//
-//    public void setHalfTime(int hour, int minutes)
-//    {
-//        HALF_TIME_HOUR = hour;
-//        HALF_TIME_MINUTE = minutes;
-//    }
-//
-//    public void setEndTime(int hour, int minutes)
-//    {
-//        END_WORK_HOUR = hour;
-//        END_WORK_MINUTE = minutes;
-//    }
 
     abstract public boolean tryEnterLift(); // true - if pass can tryEnterLift
     abstract public boolean isValid();

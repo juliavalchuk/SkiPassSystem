@@ -14,7 +14,7 @@ public class SkiPassType {
 
     public final static int COUNT = 7;
 
-    public static String intTypeToString(int type)
+    public static String toString(int type)
     {
         String sType;
         switch (type)
@@ -41,7 +41,7 @@ public class SkiPassType {
                 sType = "Weekend a half day ski-pass";
                 break;
             default:
-                throw new IllegalArgumentException("Invalid type of ski-pass. Recomended to use constant from this class");
+                throw new IllegalArgumentException("Invalid type of ski-pass. Recommended to use constant from this class");
         }
         return sType;
     }

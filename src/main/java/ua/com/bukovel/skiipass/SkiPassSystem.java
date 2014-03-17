@@ -8,100 +8,102 @@ import java.util.UUID;
  * Created by julia
  */
 public class SkiPassSystem {
+    SkiPassPrototype passPrototype;
     private final int AMOUNT_DEFAULT = 1;
 
-    private MyArrayList<String,SkiPass> skipassList = new MyArrayList<String,SkiPass>();
+    private MyArrayList<UUID,SkiPass> skipassList = new MyArrayList<UUID,SkiPass>();
     private int[] acceptLifts = new int[SkiPassType.COUNT];
     private  int[] declineLifts = new int[SkiPassType.COUNT];
 
-    public SkiPass createSkiiPass(int skiiPassType)
-    {
-        return createSkiiPass(skiiPassType, AMOUNT_DEFAULT);
+    public SkiPassSystem(){
+        passPrototype = new SkiPassPrototype();
+        setPrototypes(passPrototype);
     }
 
-    public SkiPass createSkiiPass(int skiiPassType, int amount)
+    public SkiPass createSkiPass(int skiPassType)
     {
-        String uuid;
-        SkiPass skiPass = SkiPassPrototype.createSkiiPass(skiiPassType);
+        return createSkiPass(skiPassType, AMOUNT_DEFAULT);
+    }
 
-        do{
-            uuid = UUID.randomUUID().toString();
-        }while(skipassList.get(uuid) != null); // while id not repeat
+    public SkiPass createSkiPass(int skiPassType, int amount)
+    {
+        UUID uuid = UUID.randomUUID(); // check id
+        SkiPass skiPass = passPrototype.createSkiPass(skiPassType);
 
-        skiPass.setStartsParametrs(uuid, skiiPassType);
+        skiPass.setStartsParameters(uuid, skiPassType);
         skiPass.setAmount(amount);
 
         skipassList.add(uuid, skiPass);
         return skiPass;
     }
 
-    public void blockSkiiPass(String id)
+    public void blockSkiPass(UUID id)
     {
         skipassList.get(id).block();
     }
 
-    public void unblockSkiiPass(String id)
+    public void unblockSkiPass(UUID id)
     {
         skipassList.get(id).unblock();
     }
 
-    public SkiPass getSkiPass(String id){
+    public SkiPass getSkiPass(UUID id){
 
         return skipassList.get(id);
     }
 
-    public boolean deleteSkiiPass(String id) // false if system cann't find ski-pass
+    public void deleteSkiPass(UUID id)
     {
-        return skipassList.remove(id) != null;
+        skipassList.remove(id);
     }
 
-     public void setPrototype()
+     public void setPrototypes(SkiPassPrototype skiPassPrototype)
      {
-         SkiPassPrototype.addPrototype(SkiPassType.SEASON_SKI_PASS, new SeasonSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKDAY_DAYS_SKI_PASS, new WeekdayDaysSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKDAY_HALF_DAY_SKI_PASS, new WeekdayDaysSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKDAY_LIFTS_SKI_PASS, new WeekdayLiftsSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKEND_DAYS_SKI_PASS, new WeekendDaysSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKEND_HALF_DAY_SKI_PASS, new WeekendDaysSkiPass());
-         SkiPassPrototype.addPrototype(SkiPassType.WEEKEND_LIFTS_SKI_PASS, new WeekendLiftsSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.SEASON_SKI_PASS, new SeasonSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKDAY_DAYS_SKI_PASS, new WeekdayDaysSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKDAY_HALF_DAY_SKI_PASS, new WeekdayDaysSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKDAY_LIFTS_SKI_PASS, new WeekdayLiftsSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKEND_DAYS_SKI_PASS, new WeekendDaysSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKEND_HALF_DAY_SKI_PASS, new WeekendDaysSkiPass());
+         skiPassPrototype.addPrototype(SkiPassType.WEEKEND_LIFTS_SKI_PASS, new WeekendLiftsSkiPass());
      }
 
 
     // reports
 
-    private boolean isExitingType(int type){
+    private boolean typeExists(int type){
         return type < SkiPassType.COUNT && type >= 0;
     }
 
-    public void setAcceptLift(int type){
-        if(!isExitingType(type)){
+    public void reportLiftAccept(int type){
+        if(!typeExists(type)){
             throw new IndexOutOfBoundsException("Wrong type");
         }
         acceptLifts[type]++;
     }
 
-    public void setDeclineLift(int type){
-        if(!isExitingType(type)){
+    public void reportLiftDecline(int type){
+        if(!typeExists(type)){
             throw new IndexOutOfBoundsException("Wrong type");
         }
         declineLifts[type]++;
     }
 
-    public int getAcceptLiftByType(int type){
-        if(!isExitingType(type)){
+    public int getLiftAcceptReportByType(int type){
+        if(!typeExists(type)){
             throw new IndexOutOfBoundsException("Wrong type");
         }
         return acceptLifts[type];
     }
 
-    public int getDeclineLiftByType(int type){
-        if(!isExitingType(type)){
+    public int getLiftDeclineReportByType(int type){
+        if(!typeExists(type)){
             throw new IndexOutOfBoundsException("Wrong type");
         }
         return declineLifts[type];
     }
 
-    public int getAcceptSum(){
+    public int getLiftAcceptReportTotal(){
         int s = 0;
         for (int i = 0; i < SkiPassType.COUNT; ++i){
             s += acceptLifts[i];
@@ -109,7 +111,7 @@ public class SkiPassSystem {
         return s;
     }
 
-    public int getDeclineSum(){
+    public int getLiftDeclineReportTotal(){
         int s = 0;
         for (int i = 0; i < SkiPassType.COUNT; ++i){
             s += declineLifts[i];

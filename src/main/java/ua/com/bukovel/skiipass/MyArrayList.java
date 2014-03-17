@@ -1,124 +1,123 @@
 package ua.com.bukovel.skiipass;
 
+import java.util.Arrays;
+
 /**
  * Created by julia
  */
 public class MyArrayList<E, T> {
-    private  T[] list;
+    private  T[] values;
     private  E[] keys;
     private  int  numElements;
+    private final int DEFAULT_CAPACITY = 10;
 
     public MyArrayList(){
-        list = (T[])new Object[1];
-        keys = (E[])new Object[1];
-        numElements = 0;
+        clear();
     }
 
+    public MyArrayList(int initialCapacity){
+        this();
+        resizeCapacity(initialCapacity);
+    }
 
     public int size(){
         return numElements;
+    }
+
+    public int capacity(){
+        return values.length;
     }
 
     public T get(E key){
         int index = getKeyIndex(key);
 
         if(index >= 0) {
-            return list[index];
+            return values[index];
         }
-        return null;
+        throw new IllegalArgumentException("Key is not presented");
     }
 
-    public T set(E key, T newValue){
-
+    public void set(E key, T newValue){
         int index = getKeyIndex(key);
 
         if (index < 0){
-            return null;
+            throw new IllegalArgumentException("Key is not presented");
         }
 
-        T oldValue = list[index];
-        list[index] = newValue;
-        return oldValue;
+        values[index] = newValue;
     }
 
     public E getKey(T target){
         int index = -1;
 
-        for(int i = 0; i < numElements; i++)
-            if(list[i].equals(target)){
-                index = i;
-            }
-        if(index < 0){
-            return null;
-        }
-        return keys[index];
-    }
-
-    public  void doubleLength(){
-        T[] newarrayl = (T[])new Object[list.length * 2];
-        E[] newarrayk = (E[])new Object[list.length * 2];
-
-        for (int i = 0; i < numElements; i++) {
-            newarrayl[i] = list[i];
-            newarrayk[i] = keys[i];
-        }
-        list = newarrayl;
-        keys = newarrayk;
-
-        //taking advantage of Array Class in Java
-        //list = Arrays.copyOf(list, list.length * 2);
-    }
-
-    public  void clear(){
-        list = null;
-        keys = null;
-        numElements = 0;
-    }
-
-    public T remove(E key){
-        int index = getKeyIndex(key);
-
-        T temp = list[index];
-        for(int i = index; i < numElements-1; ++i) {
-            list[i] = list[i + 1];
-            keys[i] = keys[i + 1];
-        }
-        numElements--;
-        if (index <0){
-            return null;
-        }
-        return temp;
-    }
-
-
-//
-//    public boolean add(T item){
-//        if(numElements == list.length)
-//            doubleLength();
-//
-//        list[numElements] = item;
-//        numElements++;
-//        return true;
-//    }
-
-    public void add(E key, T item){
-        if(numElements == list.length)
-            doubleLength();
-        list[numElements] = item;
-        keys[numElements++] = key;
-
-
-
-    }
-
-    private int getKeyIndex(E key) {
-        int index = -1;
-        for(int i = 0; i< numElements; ++i) {
-            if(keys[i].equals(key)){
+        for (int i = 0; i < size(); i++) {
+            if(values[i].equals(target)){
                 index = i;
                 break;
             }
         }
-        return index;
+
+        if (index < 0){
+            throw new IllegalArgumentException("Value is not presented");
+        }
+
+        return keys[index];
+    }
+
+    public void clear(){
+        values = (T[])new Object[DEFAULT_CAPACITY];
+        keys = (E[])new Object[DEFAULT_CAPACITY];
+        numElements = 0;
+    }
+
+    public boolean remove(E key){
+        int index = getKeyIndex(key);
+
+        if (index < 0){
+            return false;
+        }
+
+        numElements--;
+
+        for(int i = index; i < size(); ++i) {
+            values[i] = values[i + 1];
+            keys[i] = keys[i + 1];
+        }
+
+        if (size() * 3 < capacity())
+        {
+            resizeCapacity(capacity() / 2);
+        }
+
+        return true;
+    }
+
+    public void add(E key, T item){
+        if(size() == capacity()) {
+            resizeCapacity(capacity() * 2);
+        }
+
+        values[numElements] = item;
+        keys[numElements] = key;
+
+        numElements++;
+    }
+
+    private int getKeyIndex(E key) {
+        for (int i = 0; i < size(); ++i) {
+            if (keys[i].equals(key)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void resizeCapacity(int newCapacity){
+        if (size() > newCapacity) {
+            throw new IllegalArgumentException("Capacity cannot be smaller than size");
+        }
+
+        values = Arrays.copyOf(values, newCapacity);
+        keys = Arrays.copyOf(keys, newCapacity);
     }
 }

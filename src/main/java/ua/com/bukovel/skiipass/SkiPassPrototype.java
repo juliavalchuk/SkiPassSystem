@@ -8,21 +8,24 @@ import java.util.HashMap;
  * Created by julia
  */
 public class SkiPassPrototype {
-    private static HashMap<Integer, SkiPass> skiiPassHashMap = new HashMap<Integer, SkiPass>();
+    private HashMap<Integer, SkiPass> skiPassHashMap = new HashMap<Integer, SkiPass>();
 
-    public static SkiPass createSkiiPass(int skiiPassType)
+    public SkiPass createSkiPass(int skiPassType)
     {
-        SkiPass skiPass = skiiPassHashMap.get(skiiPassType);
+        if(skiPassType < 0 || skiPassType > SkiPassType.COUNT){
+            throw new IllegalArgumentException("Illegal type");
+        }
+        SkiPass skiPass = skiPassHashMap.get(skiPassType);
         return (SkiPass) skiPass.clone();
     }
 
-    public static void addPrototype(int type, SkiPass skiPass)
+    public void addPrototype(int type, SkiPass skiPass)
     {
-        skiiPassHashMap.put(type, skiPass);
+        skiPassHashMap.put(type, skiPass);
     }
 
-    public static void removePrototype(int type)
+    public void removePrototype(int type)
     {
-        skiiPassHashMap.remove(type);
+        skiPassHashMap.remove(type);
     }
 }
