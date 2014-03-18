@@ -12,11 +12,12 @@ public class SkiPassPrototype {
 
     public SkiPass createSkiPass(int skiPassType)
     {
-        if(skiPassType < 0 || skiPassType > SkiPassType.COUNT){
-            throw new IllegalArgumentException("Illegal type");
+        try{
+            SkiPass skiPass = skiPassHashMap.get(skiPassType);
+            return (SkiPass) skiPass.clone();
+        } catch (Exception ex){ // what exception?
+            throw new IllegalArgumentException("Invalid type");
         }
-        SkiPass skiPass = skiPassHashMap.get(skiPassType);
-        return (SkiPass) skiPass.clone();
     }
 
     public void addPrototype(int type, SkiPass skiPass)

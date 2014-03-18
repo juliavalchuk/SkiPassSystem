@@ -75,13 +75,4 @@ public class SkiPassTest {
         assertEquals(expResult, actResult);
     }
 
-    @Test
-    public void isWorkBlokedSkiPass()
-    {
-        SkiPass skiiPass = new WeekdayDaysSkiPass();
-        skiiPass.block();
-        boolean expResult = false;
-
-    }
-
 }
