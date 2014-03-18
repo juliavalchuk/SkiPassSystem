@@ -1,5 +1,6 @@
 package ua.com.bukovel.skipass;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,8 +19,8 @@ public class SkiPassSystemTest {
     static SkiPassSystem skiPassSystem;
 
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void beforeClass() {
         skiPassSystem = new SkiPassSystem();
     }
 
@@ -53,12 +54,12 @@ public class SkiPassSystemTest {
         assertEquals(expResult, actResult);
     }
 
-    @Test(expected = IllegalArgumentException.class) //really?
+    @Test(expected = IllegalArgumentException.class)
     public void testGetSkiPassByInvalidId(){
         SkiPass skiPass = skiPassSystem.getSkiPass(UUID.fromString("1-1-1-1-1"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetLiftAcceptReportByTypeWrongType(){
         skiPassSystem.getLiftAcceptReportByType(100);
     }
@@ -70,7 +71,24 @@ public class SkiPassSystemTest {
         assertEquals(expResult, actResult);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    public void testGetLiftAcceptReportByTypeWithSomeReport(){
+        skiPassSystem.reportLiftAccept(1);
+        int actResult = skiPassSystem.getLiftAcceptReportByType(1);
+        int expResult = 1;
+        assertEquals(expResult, actResult);
+    }
+
+    @Test
+    public void testGetLiftAcceptReportTotal(){
+        skiPassSystem.reportLiftAccept(1);
+        skiPassSystem.reportLiftAccept(3);
+        int actResult = skiPassSystem.getLiftAcceptReportTotal();
+        int expResult = 2;
+        assertEquals(expResult, actResult);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetLiftDeclineReportByTypeWrongType(){
         skiPassSystem.getLiftDeclineReportByType(100);
     }
@@ -79,6 +97,24 @@ public class SkiPassSystemTest {
     public void testGetLiftDeclineReportByTypeWithoutAnyReport(){
         int actResult = skiPassSystem.getLiftDeclineReportByType(1);
         int expResult = 0;
+        assertEquals(expResult, actResult);
+    }
+
+    @Test
+    public void testGetLiftDeclineReportByTypeWithSomeReport(){
+        skiPassSystem.reportLiftDecline(1);
+        int actResult = skiPassSystem.getLiftDeclineReportByType(1);
+        int expResult = 1;
+        assertEquals(expResult, actResult);
+    }
+
+    @Test
+    public void testGetLiftDeclineReportTotal(){
+        skiPassSystem.reportLiftDecline(1);
+        skiPassSystem.reportLiftDecline(3);
+        skiPassSystem.reportLiftDecline(3);
+        int actResult = skiPassSystem.getLiftDeclineReportTotal();
+        int expResult = 3;
         assertEquals(expResult, actResult);
     }
 

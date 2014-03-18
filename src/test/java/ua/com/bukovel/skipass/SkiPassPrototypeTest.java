@@ -16,6 +16,7 @@ public class SkiPassPrototypeTest {
 
     @BeforeClass
     public static void beforeClass() {
+        prototype = new SkiPassPrototype();
         prototype.addPrototype(1, new SeasonSkiPass());
         prototype.addPrototype(2, new WeekdayDaysSkiPass());
         prototype.addPrototype(6, new WeekdayLiftsSkiPass());
@@ -38,9 +39,11 @@ public class SkiPassPrototypeTest {
         SkiPass skiPass = prototype.createSkiPass(2);
     }
 
-    @Test(expected = IllegalArgumentException.class) //??
+    @Test
     public void testAddExistedKey(){
         prototype.addPrototype(1, new WeekendDaysSkiPass());
+        SkiPass skiPass = prototype.createSkiPass(1);
+        assertNotNull(skiPass);
     }
 
 }

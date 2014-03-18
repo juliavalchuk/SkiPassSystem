@@ -7,6 +7,8 @@ import java.util.Calendar;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by julia
@@ -91,8 +93,8 @@ public class DaysSkiPassTest {
             startTime = Calendar.getInstance();
             endTime = (Calendar)startTime.clone();
 
-            startTime.set(Calendar.DAY_OF_YEAR,Calendar.DAY_OF_YEAR - 1);
-            endTime.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_YEAR + 1);
+            startTime.set(Calendar.DAY_OF_YEAR,startTime.get(Calendar.DAY_OF_YEAR) - 1);
+            endTime.set(Calendar.DAY_OF_YEAR, endTime.get(Calendar.DAY_OF_YEAR) + 1);
 
         }
     }
@@ -103,8 +105,8 @@ public class DaysSkiPassTest {
             startTime = Calendar.getInstance();
             endTime = (Calendar)startTime.clone();
 
-            startTime.set(Calendar.DAY_OF_YEAR,Calendar.DAY_OF_YEAR - 3);
-            endTime.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_YEAR - 1);
+            startTime.set(Calendar.DAY_OF_YEAR,startTime.get(Calendar.DAY_OF_YEAR) - 3);
+            endTime.set(Calendar.DAY_OF_YEAR, endTime.get(Calendar.DAY_OF_YEAR) - 1);
 
         }
     }
@@ -115,8 +117,8 @@ public class DaysSkiPassTest {
             startTime = Calendar.getInstance();
             endTime = (Calendar)startTime.clone();
 
-            startTime.set(Calendar.DAY_OF_YEAR,Calendar.DAY_OF_YEAR + 1);
-            endTime.set(Calendar.DAY_OF_YEAR, Calendar.DAY_OF_YEAR + 3);
+            startTime.set(Calendar.DAY_OF_YEAR,startTime.get(Calendar.DAY_OF_YEAR) + 1);
+            endTime.set(Calendar.DAY_OF_YEAR, endTime.get(Calendar.DAY_OF_YEAR) + 3);
 
         }
     }
