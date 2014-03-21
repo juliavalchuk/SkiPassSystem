@@ -35,6 +35,7 @@ public class TourniquetTest {     // Mock testing
 
         when(mockSystem.getSkiPass(UUID.fromString("1-1-1-1-1"))).thenReturn(mockDaysSkiPass);
         when(mockSystem.getSkiPass(UUID.fromString("2-2-2-2-2"))).thenReturn(mockDaysSkiPass);
+        when(mockDaysSkiPass.getType()).thenReturn(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
     }
 
     @Test

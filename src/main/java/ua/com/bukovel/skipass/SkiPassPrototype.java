@@ -8,9 +8,9 @@ import java.util.HashMap;
  * Created by julia
  */
 public class SkiPassPrototype {
-    private HashMap<Integer, SkiPass> skiPassHashMap = new HashMap<Integer, SkiPass>();
+    private HashMap<SkiPassType, SkiPass> skiPassHashMap = new HashMap<SkiPassType, SkiPass>();
 
-    public SkiPass createSkiPass(int skiPassType)
+    public SkiPass createSkiPass(SkiPassType skiPassType)
     {
         try{
             SkiPass skiPass = skiPassHashMap.get(skiPassType);
@@ -20,12 +20,12 @@ public class SkiPassPrototype {
         }
     }
 
-    public void addPrototype(int type, SkiPass skiPass)
+    public void addPrototype(SkiPassType type, SkiPass skiPass)
     {
         skiPassHashMap.put(type, skiPass);
     }
 
-    public void removePrototype(int type)
+    public void removePrototype(SkiPassType type)
     {
         skiPassHashMap.remove(type);
     }

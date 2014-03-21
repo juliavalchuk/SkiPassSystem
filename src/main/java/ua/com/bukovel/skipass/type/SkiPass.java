@@ -10,18 +10,17 @@ import java.util.UUID;
 public abstract class SkiPass implements Cloneable {
     protected UUID id; // uniq id
     protected int amount; // days or lifts
-    protected int type; // kind of skii-pass
+    protected SkiPassType type; // kind of skii-pass
     protected boolean isblocked;
 
-    public void setStartsParameters(UUID uuid, int type){
+    public void setStartsParameters(UUID uuid, SkiPassType type){
         if(id != null){
             throw new IllegalArgumentException("Ski-pass has already had id");
         }
-        id = uuid;
-        if(type >= SkiPassType.COUNT){
-            throw new IllegalArgumentException(String.format("Type must be less than %i",
-                    SkiPassType.COUNT));
+        if(type == null){
+            throw new IllegalArgumentException(String.format("Wrong type"));
         }
+        id = uuid;
         this.type = type;
 
 
@@ -51,13 +50,13 @@ public abstract class SkiPass implements Cloneable {
         return amount;
     }
 
-    public int getType()
+    public SkiPassType getType()
     {
         return type;
     }
 
     public String getTypeString(){
-        return SkiPassType.toString(type);
+        return type.toString();
     }
 
     public void block(){

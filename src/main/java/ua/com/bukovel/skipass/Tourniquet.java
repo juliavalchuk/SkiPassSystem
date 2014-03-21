@@ -23,11 +23,11 @@ public class Tourniquet {
             return false;
         }
         if(!skiPass.tryEnterLift()){
-            skiPassSystem.reportLiftDecline(skiPass.getType());
+            skiPassSystem.reportLiftDecline(skiPass.getType().ordinal());
             return false;
         }
 
-        skiPassSystem.reportLiftAccept(skiPass.getType());
+        skiPassSystem.reportLiftAccept(skiPass.getType().ordinal());
         return true;
     }
 }

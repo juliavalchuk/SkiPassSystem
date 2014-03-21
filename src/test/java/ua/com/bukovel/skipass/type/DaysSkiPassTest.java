@@ -1,8 +1,10 @@
 package ua.com.bukovel.skipass.type;
 
 import org.junit.Test;
+import ua.com.bukovel.skipass.SkiPassType;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -18,6 +20,7 @@ public class DaysSkiPassTest {
     @Test
     public void testGetAmountOfDaysWhenSkiPassWasUsing(){
         SkiPass skiPass = new WeekdayDaysSkiPass();
+        skiPass.setStartsParameters(UUID.randomUUID(), SkiPassType.WEEKDAY_DAYS_SKI_PASS);
         skiPass.setAmount(5);
         skiPass.tryEnterLift();
         skiPass.tryEnterLift();

@@ -17,32 +17,32 @@ public class SkiPassPrototypeTest {
     @BeforeClass
     public static void beforeClass() {
         prototype = new SkiPassPrototype();
-        prototype.addPrototype(1, new SeasonSkiPass());
-        prototype.addPrototype(2, new WeekdayDaysSkiPass());
-        prototype.addPrototype(6, new WeekdayLiftsSkiPass());
+        prototype.addPrototype(SkiPassType.SEASON_SKI_PASS, new SeasonSkiPass());
+        prototype.addPrototype(SkiPassType.WEEKDAY_DAYS_SKI_PASS, new WeekdayDaysSkiPass());
+        prototype.addPrototype(SkiPassType.WEEKDAY_LIFTS_SKI_PASS, new WeekdayLiftsSkiPass());
     }
 
     @Test
     public void testCreateSkiPassWithValidType(){
-        SkiPass skiPass = prototype.createSkiPass(1);
+        SkiPass skiPass = prototype.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
         assertNotNull(skiPass);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateSkiPassWithWrongType(){
-        SkiPass skiPass = prototype.createSkiPass(0);
+        SkiPass skiPass = prototype.createSkiPass(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveAndCreateSkiPass(){
-        prototype.removePrototype(2);
-        SkiPass skiPass = prototype.createSkiPass(2);
+        prototype.removePrototype(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
+        SkiPass skiPass = prototype.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
     }
 
     @Test
     public void testAddExistedKey(){
-        prototype.addPrototype(1, new WeekendDaysSkiPass());
-        SkiPass skiPass = prototype.createSkiPass(1);
+        prototype.addPrototype(SkiPassType.WEEKDAY_DAYS_SKI_PASS, new WeekendDaysSkiPass());
+        SkiPass skiPass = prototype.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
         assertNotNull(skiPass);
     }
 

@@ -26,7 +26,7 @@ public class SkiPassSystemTest {
 
     @Test
     public void testCreateSkiiPassWithOneParametrsAndValidType(){
-        SkiPass skiPass = skiPassSystem.createSkiPass(1);
+        SkiPass skiPass = skiPassSystem.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS);
         int actResult = skiPass.getAmount();
         int expResult = 1;
         assertEquals(expResult, actResult);
@@ -34,7 +34,7 @@ public class SkiPassSystemTest {
 
     @Test
     public void testCreateSkiiPassWithTwoParametrsAndValidType(){
-        SkiPass skiPass = skiPassSystem.createSkiPass(1, 3);
+        SkiPass skiPass = skiPassSystem.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS, 3);
         int actResult = skiPass.getAmount();
         int expResult = 3;
         assertEquals(expResult, actResult);
@@ -42,12 +42,12 @@ public class SkiPassSystemTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateSkiiPassWithTwoParametrsAndInvalidType(){
-        SkiPass skiPass = skiPassSystem.createSkiPass(100, 3);
+        SkiPass skiPass = skiPassSystem.createSkiPass(null, 3);
     }
 
     @Test
     public void testGetSkiPassByValidId(){
-        UUID uuid = skiPassSystem.createSkiPass(1, 3).getId();
+        UUID uuid = skiPassSystem.createSkiPass(SkiPassType.WEEKDAY_DAYS_SKI_PASS, 3).getId();
         SkiPass skiPass = skiPassSystem.getSkiPass(uuid);
         int actResult = skiPass.getAmount();
         int expResult = 3;

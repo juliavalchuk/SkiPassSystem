@@ -14,7 +14,7 @@ public class Main {
         // system
         SkiPassSystem system = new SkiPassSystem();
 
-        // tourniquets 
+        // tourniquets
         Tourniquet tourniquet1 = new Tourniquet(system);
         Tourniquet tourniquet2 = new Tourniquet(system);
 
@@ -37,5 +37,7 @@ public class Main {
 
         System.out.println(system.getLiftAcceptReportTotal());
         System.out.println(system.getLiftDeclineReportTotal());
+
+        System.out.println(skiPassS.getType().toString());
     }
 }

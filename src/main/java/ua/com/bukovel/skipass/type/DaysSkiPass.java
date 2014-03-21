@@ -63,8 +63,8 @@ public class DaysSkiPass extends SkiPass {
 
         switch (type)
         {
-            case SkiPassType.WEEKDAY_HALF_DAY_SKI_PASS:
-            case SkiPassType.WEEKEND_HALF_DAY_SKI_PASS:
+            case WEEKDAY_HALF_DAY_SKI_PASS:
+            case WEEKEND_HALF_DAY_SKI_PASS:
                 activateHalfDay();
             default:
                 setStartTimeOfData(startTime);

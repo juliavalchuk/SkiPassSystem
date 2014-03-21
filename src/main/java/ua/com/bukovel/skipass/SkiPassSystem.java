@@ -20,12 +20,12 @@ public class SkiPassSystem {
         setPrototypes(passPrototype);
     }
 
-    public SkiPass createSkiPass(int skiPassType)
+    public SkiPass createSkiPass(SkiPassType skiPassType)
     {
         return createSkiPass(skiPassType, AMOUNT_DEFAULT);
     }
 
-    public SkiPass createSkiPass(int skiPassType, int amount)
+    public SkiPass createSkiPass(SkiPassType skiPassType, int amount)
     {
         UUID uuid = UUID.randomUUID(); // check id
         SkiPass skiPass = passPrototype.createSkiPass(skiPassType);

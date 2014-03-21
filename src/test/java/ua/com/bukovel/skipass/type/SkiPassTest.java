@@ -17,20 +17,20 @@ public class SkiPassTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetSkiPassParametrsTwise(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setStartsParameters(UUID.randomUUID(), 1);
-        skiPass.setStartsParameters(UUID.randomUUID(), 1);
+        skiPass.setStartsParameters(UUID.randomUUID(), SkiPassType.WEEKDAY_LIFTS_SKI_PASS);
+        skiPass.setStartsParameters(UUID.randomUUID(), SkiPassType.WEEKDAY_LIFTS_SKI_PASS);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetSkiPassParametrsWithIncorectType(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setStartsParameters(UUID.randomUUID(), 100);
+        skiPass.setStartsParameters(UUID.randomUUID(), null);
     }
 
     @Test
     public void testGetId(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
-        skiPass.setStartsParameters(UUID.fromString("1-1-1-1-1"), 1);
+        skiPass.setStartsParameters(UUID.fromString("1-1-1-1-1"), SkiPassType.WEEKDAY_LIFTS_SKI_PASS);
         UUID expResult = skiPass.getId();
         UUID actResult = UUID.fromString("1-1-1-1-1");
         assertEquals(expResult, actResult);
@@ -70,8 +70,8 @@ public class SkiPassTest {
     public void testGetType(){
         SkiPass skiPass = new WeekdayLiftsSkiPass();
         skiPass.setStartsParameters(UUID.fromString("1-1-1-1-1"), SkiPassType.WEEKDAY_LIFTS_SKI_PASS);
-        int expResult = skiPass.getType();
-        int actResult = 3;
+        SkiPassType expResult = skiPass.getType();
+        SkiPassType actResult = SkiPassType.WEEKDAY_LIFTS_SKI_PASS;
         assertEquals(expResult, actResult);
     }
 
